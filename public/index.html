@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Monitoring</title>
+</head>
+<body>
+    <h1>Start Folder Monitoring</h1>
+    <form method="POST" action="/start">
+        <label for="folderToMonitor">Folder to Monitor:</label>
+        <input type="text" id="folderToMonitor" name="folderToMonitor"  required><br><br>
+
+        <label for="repoName">Repository Name:</label>
+        <input type="text" id="repoName" name="repoName" value="ai" required><br><br>
+
+        <label>Create or Use Existing Repository:</label><br>
+        <input type="radio" id="createNewRepo" name="name" value="y" required>
+        <label for="createNewRepo">Create New Repository</label><br>
+        <input type="radio" id="useExistingRepo" name="name" value="n">
+        <label for="useExistingRepo">Use Existing Repository</label><br><br>
+
+        <button type="submit">Start Monitoring</button>
+    </form>
+</body>
+</html>

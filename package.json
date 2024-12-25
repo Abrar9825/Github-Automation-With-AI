@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.9",
+    "base-64": "^1.0.0",
+    "base64-js": "^1.5.1",
+    "chokidar": "^4.0.3",
+    "data-fns": "^1.1.0",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "minimatch": "^10.0.1",
+    "path": "^0.12.7",
+    "toidentifier": "^1.0.1",
+    "winston": "^3.17.0"
+  },
+  "type": "module"
+}
