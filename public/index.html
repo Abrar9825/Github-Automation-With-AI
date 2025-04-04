@@ -3,24 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Monitoring</title>
+    <title>Automate Your Folder Sync and Keep Your GitHub Always Updated!</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F4F7FB; /* Soft off-white background */
+            margin: 0;
+            padding: 0;
+            color: #2C3E50; /* Dark gray text for readability */
+        }
+
+        /* Center the form in the viewport */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #2D3436; /* Darker charcoal gray for the form background */
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ECF0F1; /* Soft off-white for text */
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Style form elements */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #ECF0F1; /* Light grayish color for text */
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #BDC3C7; /* Soft gray border for inputs */
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #F5F6FA; /* Light gray for input fields */
+            color: #2C3E50; /* Dark text inside input fields */
+        }
+
+        input[type="text"]:focus {
+            border-color: #1ABC9C; /* Muted teal color for focus */
+            outline: none;
+        }
+
+        .radio-label {
+            font-size: 14px;
+            color: #ECF0F1;
+            margin-right: 20px;
+        }
+
+        .radio-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #ECF0F1;
+            margin-right: 10px;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #1ABC9C; /* Muted teal for the button */
+            color: #FFFFFF; /* White text on button */
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #16A085; /* Slightly darker teal on hover */
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #7F8C8D; /* Soft gray for footer text */
+            margin-top: 40px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Start Folder Monitoring</h1>
-    <form method="POST" action="/start">
-        <label for="folderToMonitor">Folder to Monitor:</label>
-        <input type="text" id="folderToMonitor" name="folderToMonitor"  required><br><br>
-
-        <label for="repoName">Repository Name:</label>
-        <input type="text" id="repoName" name="repoName" value="ai" required><br><br>
-
-        <label>Create or Use Existing Repository:</label><br>
-        <input type="radio" id="createNewRepo" name="name" value="y" required>
-        <label for="createNewRepo">Create New Repository</label><br>
-        <input type="radio" id="useExistingRepo" name="name" value="n">
-        <label for="useExistingRepo">Use Existing Repository</label><br><br>
-
-        <button type="submit">Start Monitoring Of Your Folder</button>
-    </form>
+    <div class="container">
+        <h1>Automate Your Folder Sync and Keep Your GitHub Always Updated!</h1>
+        <form method="POST" action="/start">
+            <div class="form-group">
+                <label for="folderToMonitor">Folder to Monitor:</label>
+                <input type="text" id="folderToMonitor" name="folderToMonitor" required>
+            </div>
+            <div class="form-group">
+                <label for="repoName">Repository Name:</label>
+                <input type="text" id="repoName" name="repoName" required>
+            </div>
+            <div class="radio-group">
+                <label>Create or Use Existing Repository:</label><br>
+                <input type="radio" id="createNewRepo" name="repoAction" value="create" required>
+                <label class="radio-label" for="createNewRepo">Create New Repository</label><br>
+                <input type="radio" id="useExistingRepo" name="repoAction" value="use">
+                <label class="radio-label" for="useExistingRepo">Use Existing Repository</label>
+            </div>
+            <div class="radio-group">
+                <label>Repository Visibility:</label><br>
+                <input type="radio" id="publicRepo" name="repoVisibility" value="public" required>
+                <label class="radio-label" for="publicRepo">Public</label><br>
+                <input type="radio" id="privateRepo" name="repoVisibility" value="private">
+                <label class="radio-label" for="privateRepo">Private</label>
+            </div>
+            <div class="checkbox-group">
+                <label class="checkbox-label" for="pushAllData">
+                    <input type="checkbox" id="pushAllData" name="pushAllData" value="true">
+                    Push all data initially
+                </label>
+            </div>
+            <button type="submit">Start Monitoring of Your Folder</button>
+        </form>
+    </div>
+    <div class="footer">
+        <p>© 2024 Your Company. All rights reserved.</p>
+    </div>
 </body>
 </html>
