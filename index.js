@@ -70,42 +70,35 @@ async function createRepo(repoName, isPrivate) {
 
 // Function to handle Git initialization, configuration, and pushing
 function setupGitRepo(folderPath, repoName) {
-    const gitUrl = `git@github.com:${username}/${repoName}.git`; // Change this to your GitHub username
+    const gitUrl = `https://${username}:${token}@github.com/${username}/${repoName}.git`;
+    // Change this to your GitHub username
 
+    // Safe Git setup
     try {
-        // Navigate to repo folder
-        process.chdir(folderPath);
-
-        // Initialize Git if not already
-        if (!fs.existsSync(".git")) {
+        if (!fs.existsSync('.git')) {
             execSync("git init");
-            execSync(`git remote add origin ${gitUrl}`);
+            execSync("git branch -M main"); // Set 'main' branch
         }
 
-        // Create .gitignore file
-        if (!fs.existsSync(".gitignore")) {
-            fs.writeFileSync(".gitignore", ".git\n.gitignore\nnode_modules\n");
+        // Remove & add origin safely
+        try {
+            execSync("git remote remove origin");
+        } catch (err) {
+            // Ignore if origin doesn't exist
         }
+        execSync(`git remote add origin ${gitUrl}`);
 
-        // Pull latest changes from remote
-        execSync("git pull origin main --allow-unrelated-histories");
-
-        // Add all files to staging
+        // Add, commit, and push directly (skip pull)
         execSync("git add .");
+        execSync(`git commit -m "Auto-upload from folder" || echo "Nothing to commit"`); // prevent commit error
+        execSync("git push -u origin main");  // main branch push
 
-        // Check if there are changes to commit
-        const status = execSync("git status --porcelain").toString().trim();
-        if (status) {
-            // Commit and push changes
-            execSync('git commit -m "All data uploaded"');
-            execSync('git push origin main');
-            console.log("✅ Repository setup and pushed successfully!");
-        } else {
-            console.log("No changes to commit.");
-        }
-    } catch (error) {
-        console.error("❌ Error:", error.message);
+        console.log("✅ Pushed to remote repository.");
+    } catch (err) {
+        console.error("❌ Git operation failed:", err.message);
     }
+
+
 }
 
 // Function to push all files from the folder to GitHub initially
