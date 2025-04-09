@@ -1,147 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automate Your Folder Sync and Keep Your GitHub Always Updated!</title>
-    <style>
-        /* General body styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #F4F7FB; /* Soft off-white background */
-            margin: 0;
-            padding: 0;
-            color: #2C3E50; /* Dark gray text for readability */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Folder Sync Automation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Center the form in the viewport */
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #2D3436; /* Darker charcoal gray for the form background */
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      color: #2e2e2e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        h1 {
-            text-align: center;
-            color: #ECF0F1; /* Soft off-white for text */
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      max-width: 540px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
 
-        /* Style form elements */
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+    .logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-        label {
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #ECF0F1; /* Light grayish color for text */
-        }
+    .logo img {
+      max-width: 90px;
+      transition: transform 0.3s ease;
+    }
 
-        input[type="text"] {
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #BDC3C7; /* Soft gray border for inputs */
-            border-radius: 6px;
-            font-size: 16px;
-            background-color: #F5F6FA; /* Light gray for input fields */
-            color: #2C3E50; /* Dark text inside input fields */
-        }
+    .logo img:hover {
+      transform: scale(1.1);
+    }
 
-        input[type="text"]:focus {
-            border-color: #1ABC9C; /* Muted teal color for focus */
-            outline: none;
-        }
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #222;
+    }
 
-        .radio-label {
-            font-size: 14px;
-            color: #ECF0F1;
-            margin-right: 20px;
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .radio-group {
-            margin-bottom: 15px;
-        }
+    label {
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
 
-        .checkbox-group {
-            margin-bottom: 15px;
-        }
+    input[type="text"] {
+      padding: 12px 14px;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      background-color: #fafafa;
+      margin-bottom: 20px;
+      font-size: 14px;
+      transition: border 0.2s;
+    }
 
-        .checkbox-label {
-            font-size: 14px;
-            color: #ECF0F1;
-            margin-right: 10px;
-        }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #444;
+      background-color: #fff;
+    }
 
-        /* Button Styling */
-        button {
-            background-color: #1ABC9C; /* Muted teal for the button */
-            color: #FFFFFF; /* White text on button */
-            padding: 14px;
-            font-size: 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .radio-group,
+    .checkbox-group {
+      margin-bottom: 20px;
+    }
 
-        button:hover {
-            background-color: #16A085; /* Slightly darker teal on hover */
-        }
+    .radio-group label,
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
 
-        /* Footer Styling */
-        .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #7F8C8D; /* Soft gray for footer text */
-            margin-top: 40px;
-        }
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: #444;
+      cursor: pointer;
+    }
 
-    </style>
+    button {
+      background-color: #333;
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #000;
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 25px;
+    }
+
+    .footer a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Automate Your Folder Sync and Keep Your GitHub Always Updated!</h1>
-        <form method="POST" action="/start">
-            <div class="form-group">
-                <label for="folderToMonitor">Folder to Monitor:</label>
-                <input type="text" id="folderToMonitor" name="folderToMonitor" required>
-            </div>
-            <div class="form-group">
-                <label for="repoName">Repository Name:</label>
-                <input type="text" id="repoName" name="repoName" required>
-            </div>
-            <div class="radio-group">
-                <label>Create or Use Existing Repository:</label><br>
-                <input type="radio" id="createNewRepo" name="repoAction" value="create" required>
-                <label class="radio-label" for="createNewRepo">Create New Repository</label><br>
-                <input type="radio" id="useExistingRepo" name="repoAction" value="use">
-                <label class="radio-label" for="useExistingRepo">Use Existing Repository</label>
-            </div>
-            <div class="radio-group">
-                <label>Repository Visibility:</label><br>
-                <input type="radio" id="publicRepo" name="repoVisibility" value="public" required>
-                <label class="radio-label" for="publicRepo">Public</label><br>
-                <input type="radio" id="privateRepo" name="repoVisibility" value="private">
-                <label class="radio-label" for="privateRepo">Private</label>
-            </div>
-            <div class="checkbox-group">
-                <label class="checkbox-label" for="pushAllData">
-                    <input type="checkbox" id="pushAllData" name="pushAllData" value="true">
-                    Push all data initially
-                </label>
-            </div>
-            <button type="submit">Start Monitoring of Your Folder</button>
-        </form>
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="Your Logo" />
     </div>
+    <h1>GitHub Folder Sync Automation</h1>
+    <form method="POST" action="/start">
+      <label for="folderToMonitor">Folder to Monitor:</label>
+      <input type="text" id="folderToMonitor" name="folderToMonitor" placeholder="Enter the folder path" required />
+
+      <label for="repoName">Repository Name:</label>
+      <input type="text" id="repoName" name="repoName" placeholder="Enter the repository name" required />
+
+      <div class="radio-group">
+        <label>Create or Use Existing Repository:</label>
+        <label><input type="radio" name="repoAction" value="create" required /> Create New Repository</label>
+        <label><input type="radio" name="repoAction" value="use" /> Use Existing Repository</label>
+      </div>
+
+      <div class="radio-group">
+        <label>Repository Visibility:</label>
+        <label><input type="radio" name="repoVisibility" value="public" required /> Public</label>
+        <label><input type="radio" name="repoVisibility" value="private" /> Private</label>
+      </div>
+
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="pushAllData" value="true" /> Push all data initially</label>
+      </div>
+
+      <button type="submit">🚀 Start Monitoring</button>
+    </form>
+
     <div class="footer">
-        <p>© 2024 Your Company. All rights reserved.</p>
+      Need help? <a href="#">Contact Support</a>
     </div>
+  </div>
 </body>
+
 </html>
